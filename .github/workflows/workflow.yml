@@ -3,7 +3,7 @@ name: Push Workflow
 on: push
 
 jobs:
-  run-python-script:
+  time:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,5 +15,36 @@ jobs:
         with:
           python-version: '3.11'  # Specify your desired Python version
 
-      - name: Run Python script
-        run: python time.py  # Replace 'your_script.py' with the name of your Python file
+      - name: Run time script
+        run: python time.py  # Replace with the name of your time script
+    
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'  # Specify your desired Python version
+
+      - name: Run test script
+        run: python test.py  # Replace with the name of your test script
+
+  deploy:
+    needs: [time, test]  # Corrected from 'need' to 'needs'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'  # Specify your desired Python version
+
+      - name: Run deploy script
+        run: python deploy.py  # Replace with the name of your deploy script
