@@ -15,8 +15,14 @@ jobs:
         with:
           python-version: '3.11'  # Specify your desired Python version
 
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-file
+          path: scripts
+
       - name: Run time script
-        run: python time.py  # Replace with the name of your time script
+        run: python scripts/time.py  # Replace with the name of your time script
     
   test:
     runs-on: ubuntu-latest
@@ -31,7 +37,7 @@ jobs:
           python-version: '3.11'  # Specify your desired Python version
 
       - name: Run test script
-        run: python test.py  # Replace with the name of your test script
+        run: python scripts/test.py  # Replace with the name of your test script
 
   deploy:
     needs: [time, test]  # Corrected from 'need' to 'needs'
@@ -47,4 +53,4 @@ jobs:
           python-version: '3.11'  # Specify your desired Python version
 
       - name: Run deploy script
-        run: python deploy.py  # Replace with the name of your deploy script
+        run: python scripts/deploy.py  # Replace with the name of your deploy script
