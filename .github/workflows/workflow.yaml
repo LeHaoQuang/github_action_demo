@@ -52,5 +52,13 @@ jobs:
         with:
           python-version: '3.11'  # Specify your desired Python version
 
+      - name: download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: python-file
+
+      - name: output file contents
+        run: ls
+
       - name: Run deploy script
         run: python scripts/deploy.py  # Replace with the name of your deploy script
